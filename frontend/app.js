@@ -91,3 +91,93 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+// Frontend JavaScript for ChetnaGPT Web Interface
+const generateBtn = document.getElementById('generateBtn');
+const loadingDiv = document.getElementById('loading');
+const outputArea = document.getElementById('outputArea');
+const outputDiv = document.getElementById('output');
+const modeSelect = document.getElementById('mode');
+const userInput = document.getElementById('userInput');
+
+generateBtn.addEventListener('click', async () => {
+    const mode = modeSelect.value;
+    const input = userInput.value.trim();
+    
+    if (!input) {
+        alert('Please enter your input before generating a response.');
+        return;
+    }
+    
+    // Show loading state
+    generateBtn.disabled = true;
+    loadingDiv.classList.remove('hidden');
+    outputArea.classList.add('hidden');
+    
+    try {
+        const response = await fetch('/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                mode: mode,
+                input: input
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        // Display the response
+        outputDiv.textContent = data.reply;
+        outputArea.classList.remove('hidden');
+        
+    } catch (error) {
+        console.error('Error:', error);
+        outputDiv.textContent = `Error: ${error.message}. Please try again.`;
+        outputArea.classList.remove('hidden');
+    } finally {
+        // Hide loading state
+        loadingDiv.classList.add('hidden');
+        generateBtn.disabled = false;
+    }
+});
+
+// Add quick example functionality
+document.addEventListener('click', (e) => {
+    if (e.target.closest('.bg-white.p-3')) {
+        const exampleDiv = e.target.closest('.bg-white.p-3');
+        const exampleText = exampleDiv.querySelector('p').textContent;
+        const title = exampleDiv.querySelector('h4').textContent;
+        
+        // Set the mode based on the example
+        if (title.includes('Proposal')) {
+            modeSelect.value = 'proposal';
+        } else if (title.includes('Business')) {
+            modeSelect.value = 'business';
+        } else if (title.includes('Tech')) {
+            modeSelect.value = 'support';
+        }
+        
+        // Set the input text
+        userInput.value = exampleText;
+        
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+});
+
+// Health check on page load
+fetch('/health')
+    .then(response => response.json())
+    .then(data => {
+        if (data.ok) {
+            console.log('✅ ChetnaGPT API is healthy');
+        }
+    })
+    .catch(error => {
+        console.error('❌ API health check failed:', error);
+    });
