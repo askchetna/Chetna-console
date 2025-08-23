@@ -7,13 +7,9 @@
     <title>ChetnaGPT - Dharmic AGI Console Assistant</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .hidden { display: none; }
+        .fade-in { animation: fade 0.25s ease-in; }
+        @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body class="bg-gradient-to-br from-orange-50 to-amber-50 min-h-screen">
@@ -35,9 +31,9 @@
             <div class="mb-6">
                 <label for="mode" class="block text-sm font-medium text-gray-700 mb-2">Select Agent Mode</label>
                 <select id="mode" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 text-lg font-medium">
-                    <option value="proposal">🤝 Proposal Help Agent</option>
-                    <option value="business">💡 Business Plan Agent</option>
-                    <option value="support">🔧 Tech Support Agent</option>
+                    <option value="proposal">Proposal Help Agent</option>
+                    <option value="business">Business Plan Agent</option>
+                    <option value="support">Tech Support Agent</option>
                 </select>
             </div>
 
@@ -47,28 +43,28 @@
                     id="input" 
                     rows="8" 
                     class="w-full p-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 text-lg resize-none"
-                    placeholder="Describe your needs, project requirements, business idea, or technical issue..."
+                    placeholder="Type here..."
                 ></textarea>
             </div>
 
             <button 
-                id="generate" 
+                id="generateBtn" 
                 class="w-full bg-gradient-to-r from-orange-600 to-amber-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-orange-700 hover:to-amber-700 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
             >
                 Generate Response
             </button>
         </div>
 
-        <!-- Output Area -->
-        <div id="outputArea" class="bg-white rounded-lg shadow-xl p-6 hidden">
-            <h3 class="text-lg font-semibold text-gray-800 mb-4">Response:</h3>
-            <div id="output" class="bg-gray-50 p-4 rounded-lg border font-mono text-sm whitespace-pre-wrap"></div>
-        </div>
-
         <!-- Loading -->
         <div id="loading" class="hidden text-center py-8">
             <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-orange-600"></div>
-            <p class="mt-2 text-gray-600">Generating dharmic response...</p>
+            <p class="mt-2 text-gray-600">⏳ Working...</p>
+        </div>
+
+        <!-- Output Area -->
+        <div id="outputArea" class="hidden bg-white rounded-lg shadow-xl p-6">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Response:</h3>
+            <pre id="output" class="whitespace-pre-wrap bg-gray-50 p-4 rounded-lg border font-mono text-sm"></pre>
         </div>
 
         <!-- Test Examples -->
@@ -77,15 +73,15 @@
             <div class="grid md:grid-cols-3 gap-4 text-sm">
                 <div class="bg-white p-3 rounded border cursor-pointer hover:shadow-md transition-shadow">
                     <h4 class="font-medium text-blue-700">Proposal Help</h4>
-                    <p class="text-gray-600 mt-1">"Need a proposal for e-commerce website development project. Client budget is $50k, timeline 3 months."</p>
+                    <p class="text-gray-600 mt-1">"Restaurant: online ordering + CRM + delivery, $15k, 3 months"</p>
                 </div>
                 <div class="bg-white p-3 rounded border cursor-pointer hover:shadow-md transition-shadow">
                     <h4 class="font-medium text-blue-700">Business Plan</h4>
-                    <p class="text-gray-600 mt-1">"AI-powered fitness app for busy professionals. Target market: working millennials. Revenue: subscription model."</p>
+                    <p class="text-gray-600 mt-1">"AI fitness app, millennials, subscription ₹299/month"</p>
                 </div>
                 <div class="bg-white p-3 rounded border cursor-pointer hover:shadow-md transition-shadow">
                     <h4 class="font-medium text-blue-700">Tech Support</h4>
-                    <p class="text-gray-600 mt-1">"Getting 500 internal server error when deploying my FastAPI app. Database connection seems fine."</p>
+                    <p class="text-gray-600 mt-1">"npm ERR! module not found: react-dom"</p>
                 </div>
             </div>
         </div>

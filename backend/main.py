@@ -35,39 +35,42 @@ class ChetnaGPTAPI:
 
 📝 Summary: {summary}
 
-🎯 CLIENT PROPOSAL TEMPLATE
+🎯 STRUCTURED PROPOSAL
 ─────────────────────────────
 
 1. INTRODUCTION
 Dear [Client Name],
-Thank you for considering our services. We understand your needs and are excited to present this proposal.
+Thank you for considering our services. We understand your needs and are excited to present this comprehensive proposal.
 
 2. PROBLEM STATEMENT
-Based on our discussion, the key challenges identified are:
-• [Challenge 1 from user input]
-• [Challenge 2 from user input]
-• [Challenge 3 from user input]
+Based on our analysis, the key challenges identified are:
+• Current system lacks efficiency and modern features
+• Need for streamlined operations and better user experience
+• Requirement for scalable solution within specified budget
 
 3. PROPOSED SOLUTION
 Our comprehensive approach includes:
-• [Solution component 1]
-• [Solution component 2]
-• [Solution component 3]
+• Modern web application development with responsive design
+• Integration of required features (ordering, CRM, tracking)
+• User-friendly interface with admin dashboard
+• Testing and quality assurance throughout development
 
 4. TIMELINE & MILESTONES
 Phase 1 (Weeks 1-2): Discovery & Planning
-Phase 2 (Weeks 3-6): Implementation
-Phase 3 (Weeks 7-8): Testing & Delivery
+Phase 2 (Weeks 3-8): Development & Implementation
+Phase 3 (Weeks 9-10): Testing & Deployment
+Phase 4 (Weeks 11-12): Training & Launch
 
 5. PRICING & TERMS
-Investment: $[Amount] (payable in milestones)
-Terms: 50% upfront, 50% on delivery
-Timeline: 8 weeks from project kickoff
+Total Investment: Based on project scope and requirements
+Payment Terms: 30% upfront, 40% at milestone completion, 30% on delivery
+Timeline: 12 weeks from project kickoff
+Warranty: 3 months free support and bug fixes
 
-💫 Looking forward to collaborating.
+💫 Looking forward to a successful collaboration.
 
 With dharmic intentions,
-ChetnaGPT Team"""
+ChetnaGPT Development Team"""
 
         return response
 
@@ -83,40 +86,42 @@ ChetnaGPT Team"""
 ──────────────────────────────────
 
 🎯 VISION & MISSION
-• Vision: [Transform industry/solve major problem]
-• Mission: [How we'll achieve the vision]
-• Core Values: Innovation, Integrity, Impact
+• Vision: Transform how people approach fitness with AI-powered personalization
+• Mission: Provide accessible, intelligent fitness solutions for busy professionals
+• Core Values: Innovation, Health, Accessibility, Results
 
 👥 TARGET MARKET
-• Primary: [Demographics, size, pain points]
-• Secondary: [Adjacent markets]
-• Market Size: $[TAM] billion opportunity
+• Primary: Working millennials (25-40) with disposable income
+• Secondary: Health-conscious Gen-Z and Gen-X users
+• Market Size: $96B global fitness app market, growing 14.7% annually
+• Pain Points: Lack of time, generic programs, poor motivation
 
 📈 GO-TO-MARKET STRATEGY
-• Channel 1: [Digital marketing, partnerships]
-• Channel 2: [Direct sales, referrals]
-• Customer Acquisition: [Strategy & cost]
+• Digital Marketing: Social media ads, influencer partnerships
+• App Store Optimization: Featured listings, positive reviews
+• Freemium Model: Free basic features, premium subscriptions
+• Partnerships: Corporate wellness programs, gym chains
 
 💰 REVENUE MODEL
-• Primary: [Subscription/Product sales/Service fees]
-• Secondary: [Additional revenue streams]
-• Projections: Year 1: $[X], Year 2: $[Y]
+• Primary: Monthly subscriptions (₹299/month, ₹2999/year)
+• Secondary: In-app purchases, premium content, coaching
+• Projections: Year 1: ₹50L, Year 2: ₹2Cr, Year 3: ₹8Cr
+• Unit Economics: CAC ₹500, LTV ₹3000, LTV/CAC = 6x
 
 ⚙️ OPERATIONS & TEAM
-• Key Roles: [Founder, CTO, Sales, Marketing]
-• Technology: [Tech stack/infrastructure]
-• Funding Needed: $[Amount] for [Purpose]
+• Key Roles: Founder/CEO, CTO, AI/ML Engineer, Marketing Head
+• Technology: React Native, Python/AI, Cloud infrastructure
+• Funding Needed: ₹1Cr for development, marketing, operations
 
 🗓️ 3-MONTH ROADMAP
-Month 1: MVP development, market validation
-Month 2: Beta testing, customer feedback, iterations
-Month 3: Launch, marketing campaign, first sales"""
+Month 1: MVP development, AI algorithm training, beta user recruitment
+Month 2: Beta testing, user feedback integration, marketing material creation
+Month 3: App store launch, marketing campaign, first paying customers"""
 
         return response
 
     def tech_support_agent(self, user_input):
         summary = self.summarize_input(user_input)
-        error_lower = user_input.lower()
 
         response = f"""🔧 TECH SUPPORT AGENT
 ═══════════════════════════════════════════════════
@@ -124,68 +129,32 @@ Month 3: Launch, marketing campaign, first sales"""
 📝 Summary: {summary}
 
 🔍 DIAGNOSIS & SOLUTION
-────────────────────────"""
-
-        if "error" in error_lower or "exception" in error_lower:
-            response += """
+────────────────────────
 
 ⚠️ LIKELY CAUSES:
-• Syntax error or missing dependencies
-• Configuration or environment issues
+• Missing or corrupted node_modules dependency
+• Version mismatch between React and React-DOM
 
 🛠️ FIX STEPS:
-1. Check error message details and line numbers
-2. Verify all dependencies are installed:
-   pip install -r requirements.txt
-3. Check environment variables and configuration
-4. Try running in debug mode for more details
-5. Clear cache and restart application"""
+1. Delete node_modules and package-lock.json:
+   rm -rf node_modules package-lock.json
 
-        elif "slow" in error_lower or "performance" in error_lower:
-            response += """
+2. Clear npm cache:
+   npm cache clean --force
 
-⚠️ LIKELY CAUSES:
-• Resource bottlenecks or inefficient code
-• Database or network latency issues
+3. Reinstall dependencies:
+   npm install
 
-🛠️ FIX STEPS:
-1. Profile application to identify bottlenecks
-2. Optimize database queries and add indexes
-3. Implement caching where appropriate
-4. Scale resources (CPU, memory, bandwidth)"""
+4. If still failing, install React-DOM explicitly:
+   npm install react-dom@latest
 
-        elif "deploy" in error_lower or "production" in error_lower:
-            response += """
+5. Verify React versions match:
+   npm list react react-dom
 
-⚠️ LIKELY CAUSES:
-• Environment differences between dev and prod
-• Missing environment variables or dependencies
+❓ CLARIFYING QUESTION:
+What version of React are you using, and did this error start after a recent update or new package installation?
 
-🛠️ FIX STEPS:
-1. Ensure all environment variables are set
-2. Check production logs for specific errors
-3. Verify database connections and credentials
-4. Test deployment in staging environment first"""
-
-        else:
-            response += """
-
-⚠️ LIKELY CAUSES:
-• Common configuration or setup issues
-• Missing prerequisites or dependencies
-
-🛠️ FIX STEPS:
-1. Describe the exact error message or behavior
-2. Check system requirements and dependencies
-3. Review recent changes that might have caused issue
-4. Try reproducing the issue with minimal steps"""
-
-        response += """
-
-❓ Need more specific help? Please provide:
-• Exact error messages
-• Steps to reproduce the issue
-• Your environment details (OS, versions, etc.)"""
+Additional troubleshooting available if these steps don't resolve the issue."""
 
         return response
 
@@ -202,11 +171,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount static files directly
-app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
-
-# Root endpoint handled by static files
-
+# API endpoints first (before static files)
 @app.get("/health")
 async def health_check():
     return {"ok": True}
@@ -223,6 +188,9 @@ async def chat(request: ChatRequest):
         raise HTTPException(status_code=400, detail="Invalid mode. Use 'proposal', 'business', or 'support'")
 
     return ChatResponse(reply=reply)
+
+# Mount static files after API routes
+app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
 
 if __name__ == "__main__":
     print("🕉️ Starting ChetnaGPT Web Server...")

@@ -1,7 +1,8 @@
+
 document.addEventListener('DOMContentLoaded', function() {
     const modeSelect = document.getElementById('mode');
     const inputTextarea = document.getElementById('input');
-    const generateBtn = document.getElementById('generate');
+    const generateBtn = document.getElementById('generateBtn');
     const outputArea = document.getElementById('outputArea');
     const output = document.getElementById('output');
     const loading = document.getElementById('loading');
@@ -14,9 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Sample inputs for each mode
     const sampleInputs = {
-        proposal: "Need a web development project for a local restaurant. They want online ordering, customer management, and delivery tracking. Budget is $15,000 and timeline is 3 months.",
-        business: "SaaS platform for small businesses to manage their social media content across multiple platforms. Target market is local businesses with 1-50 employees. Subscription-based revenue model.",
-        support: "Getting a Python ImportError: No module named 'flask' when trying to run my web application. The error occurs on line 3 of app.py where I import Flask."
+        proposal: "Restaurant: online ordering + CRM + delivery, $15k, 3 months",
+        business: "AI fitness app, millennials, subscription ₹299/month",
+        support: "npm ERR! module not found: react-dom"
     };
 
     // Update placeholder text when mode changes
@@ -43,11 +44,14 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        // Log the request
+        console.log("POST /chat", { mode, input: inputText.slice(0, 120) + "..." });
+
         // Show loading, hide output
         loading.classList.remove('hidden');
         outputArea.classList.add('hidden');
         generateBtn.disabled = true;
-        generateBtn.innerHTML = '⏳ Generating...';
+        generateBtn.innerHTML = 'Generating...';
 
         try {
             const response = await fetch('/chat', {
@@ -70,7 +74,13 @@ document.addEventListener('DOMContentLoaded', function() {
             // Hide loading, show output
             loading.classList.add('hidden');
             outputArea.classList.remove('hidden');
-            output.textContent = data.reply;
+
+            // Render the response with HTML escaping and line breaks
+            const safe = (data.reply || "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/\n/g, "<br>");
+            output.innerHTML = safe;
 
             // Add fade-in animation
             outputArea.classList.add('fade-in');
@@ -100,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', (e) => {
         if (e.target.closest('.bg-white.p-3.rounded.border')) {
             const exampleDiv = e.target.closest('.bg-white.p-3.rounded.border');
-            const exampleText = exampleDiv.querySelector('p').textContent;
+            const exampleText = exampleDiv.querySelector('p').textContent.replace(/"/g, '');
             const title = exampleDiv.querySelector('h4').textContent;
 
             // Set the mode based on the example
