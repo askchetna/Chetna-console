@@ -15,7 +15,7 @@ run = ["python3", "main.py"]
 deploymentTarget = "cloudrun"
 
 [workflows]
-runButton = "Run ChetnaGPT"
+runButton = "Run ChetnaGPT Web"
 
 [[workflows.workflow]]
 name = "Run ChetnaGPT"
@@ -25,3 +25,12 @@ mode = "sequential"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "python main.py"
+
+[[workflows.workflow]]
+name = "Run ChetnaGPT Web"
+author = 46794741
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python backend/main.py"
