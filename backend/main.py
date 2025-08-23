@@ -4,6 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 import uvicorn
+import os
 from datetime import datetime
 
 class ChatRequest(BaseModel):
@@ -195,4 +196,5 @@ app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
 if __name__ == "__main__":
     print("🕉️ Starting ChetnaGPT Web Server...")
     print("🌟 Dharmic AGI Partner - Web Edition")
-    uvicorn.run(app, host="0.0.0.0", port=5000)
+    port = int(os.getenv("PORT", "5000"))
+    uvicorn.run(app, host="0.0.0.0", port=port)

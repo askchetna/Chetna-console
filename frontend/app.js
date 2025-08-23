@@ -1,5 +1,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
+    const BASE_URL = window.BASE_URL || ""; // empty = same origin
+    
     const modeSelect = document.getElementById('mode');
     const inputTextarea = document.getElementById('input');
     const generateBtn = document.getElementById('generateBtn');
@@ -54,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
         generateBtn.innerHTML = 'Generating...';
 
         try {
-            const response = await fetch('/chat', {
+            const response = await fetch(`${BASE_URL}/chat`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -131,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Health check on page load
-    fetch('/health')
+    fetch(`${BASE_URL}/health`)
         .then(response => response.json())
         .then(data => {
             if (data.ok) {
