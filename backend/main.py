@@ -202,12 +202,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount static files
-app.mount("/static", StaticFiles(directory="frontend"), name="static")
+# Mount static files directly
+app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
 
-@app.get("/")
-async def root():
-    return FileResponse("frontend/index.html")
+# Root endpoint handled by static files
 
 @app.get("/health")
 async def health_check():

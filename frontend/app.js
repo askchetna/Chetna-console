@@ -1,10 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
     const modeSelect = document.getElementById('mode');
     const inputTextarea = document.getElementById('input');
-    const generateBtn = document.getElementById('generateBtn');
+    const generateBtn = document.getElementById('generate');
     const outputArea = document.getElementById('outputArea');
     const output = document.getElementById('output');
     const loading = document.getElementById('loading');
+
+    // Check if all elements exist
+    if (!generateBtn || !outputArea || !output || !loading) {
+        console.error('Some required DOM elements are missing');
+        return;
+    }
 
     // Sample inputs for each mode
     const sampleInputs = {
@@ -41,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
         loading.classList.remove('hidden');
         outputArea.classList.add('hidden');
         generateBtn.disabled = true;
-        generateBtn.textContent = 'Generating...';
+        generateBtn.innerHTML = '⏳ Generating...';
 
         try {
             const response = await fetch('/chat', {
@@ -78,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error:', error);
         } finally {
             generateBtn.disabled = false;
-            generateBtn.textContent = 'Generate Response';
+            generateBtn.innerHTML = 'Generate Response';
         }
     });
 
