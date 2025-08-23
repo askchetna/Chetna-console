@@ -84,6 +84,45 @@ const testModes = async () => {
 testModes();
 ```
 
+## Railway Deployment
+
+### Steps to Deploy on Railway
+
+1. **Push to GitHub:**
+   ```bash
+   git add .
+   git commit -m "Prepare for Railway deployment"
+   git push origin main
+   ```
+
+2. **Deploy on Railway:**
+   - Go to [Railway](https://railway.app)
+   - Click "New Project" → "Deploy from GitHub"
+   - Select your repository
+   - Set Start Command: `uvicorn backend.main:app --host 0.0.0.0 --port $PORT`
+   - Add Environment Variable (if needed): `PYTHON_VERSION=3.11`
+   - Deploy
+
+3. **Verify Deployment:**
+   ```bash
+   # Health check
+   curl https://<your-railway-url>/health
+   # Should return: {"ok": true}
+   
+   # Test chat endpoint
+   curl -X POST https://<your-railway-url>/chat \
+     -H "Content-Type: application/json" \
+     -d '{"mode":"proposal","input":"Restaurant: ordering + CRM + delivery, $15k, 3 months"}'
+   ```
+
+4. **Frontend Configuration:**
+   To use with deployed backend, set in your frontend:
+   ```javascript
+   window.BASE_URL = "https://<your-railway-url>";
+   ```
+
+**Note:** Replit also offers seamless deployment through the Deployments tab, which might be more convenient for this project.
+
 ## Dharmic Principles
 
 - **Truth (Satya)**: Honest, accurate responses
