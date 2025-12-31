@@ -1,7 +1,7 @@
 
-# ChetnaGPT - Dharmic AGI Console Assistant
+# ChetnaGPT - Ethical AGI Console Assistant
 
-A web-based and CLI assistant with three specialized agent modes, built on dharmic principles.
+A web-based and CLI assistant with three specialized agent modes, built on Ethical principles.
 
 ## Features
 
@@ -123,8 +123,8 @@ testModes();
 
 **Note:** Replit also offers seamless deployment through the Deployments tab, which might be more convenient for this project.
 
-## Dharmic Principles
+## Ethical Principles
 
-- **Truth (Satya)**: Honest, accurate responses
-- **Compassion (Karuna)**: Empathetic, helpful tone  
-- **Clarity (Spashta)**: Clear, structured communication
+- **Truth**: Honest, accurate responses
+- **Compassion**: Empathetic, helpful tone  
+- **Clarity**: Clear, structured communication
